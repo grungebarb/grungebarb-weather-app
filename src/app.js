@@ -22,7 +22,8 @@ currentTime.innerHTML = formatTime(currentDate);
 function showTemperature(response) {
   console.log(response);
   document.querySelector("#current-city").innerHTML = `${response.data.name}, ${response.data.sys.country}`;
-  document.querySelector("#current-temperature").innerHTML = `${Math.round(response.data.main.temp)}ºC`;
+  celsiusTemp = Math.round(response.data.main.temp);
+  document.querySelector("#current-temperature").innerHTML = `${celsiusTemp}ºC`;
   document.querySelector("#humidity").innerHTML = `Humidity: ${response.data.main.humidity}%`;
   document.querySelector("#wind").innerHTML = `Wind: ${Math.round(response.data.wind.speed)}km/h`;
   document.querySelector("#weather-description").innerHTML = response.data.weather[0].description;
@@ -47,3 +48,21 @@ searchForm.addEventListener("submit", searchCity);
 search("Moralzarzal");
 
 // Icon library
+
+// Units convertion
+function changeUnits(event) {
+  event.preventDefault();
+  let unitsConversion = document.querySelector("#units-conversion");
+  if (unitsConversion.innerHTML === "F") {
+    let tempElement = document.querySelector("#current-temperature");
+    let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
+    tempElement.innerHTML = `${Math.round(fahrenheitTemp)}ºF`;unitsConversion.innerHTML = "C";
+  } else {
+    let tempElement = document.querySelector("#current-temperature");
+    tempElement.innerHTML = `${celsiusTemp}ºC`;unitsConversion.innerHTML = "F";
+  }
+}
+let conversionButton = document.querySelector("#units-btn");
+conversionButton.addEventListener("click", changeUnits);
+let celsiusTemp = null;
+
