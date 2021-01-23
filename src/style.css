@@ -38,14 +38,16 @@ ul {
   font-size: 50px;
   float: left;
 }
-.rounded-pink {
+.forecast-squares {
   /*background-color: #6193d4;
   color: white;*/
   color: #6193d4;
   border: solid 5px #6193d4;
+  background-color: #e0edff;
   border-radius: 5px;
   margin: 10px;
   padding: 20px;
+  padding-bottom: 10px;
   text-align: center;
 }
 .units-info {

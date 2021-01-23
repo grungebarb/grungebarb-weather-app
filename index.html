@@ -17,12 +17,12 @@
     <div class="wrapper">
       <div class="weather-app">
         <div class="search-section">
-          <form>
+          <form id="search-form">
             <div class="row">
               <div class="col-7">
                 <input
                 type="text"
-                placeholder="Enter a city, please" class="form-control">
+                placeholder="Enter a city, please" class="form-control" id="search-input">
               </div>
               <div class="col-2">
                 <button type="submit" class="btn search-btn px-4">
@@ -38,40 +38,40 @@
           </form>
         </div>
         <div class="city-info">
-          <h1>
-            Moralzarzal, Madrid
+          <h1 id="current-city">
+            Loading...
           </h1>
           <ul>
             <li>
               Last update:
               <span id="current-time">
-                Friday 15, 05:00h</span>
+                Loading...</span>
             </li>
-            <li>
-              Clear
+            <li id="weather-description">
+              Loading...
             </li>
           </ul>
         </div>
         <div class="row acurate-data-section">
           <div class="col-3">
-            <img src="src/icons/icon_50d.png" alt="mist" class="current-icon">
+            <img src="src/icons/icon_50d.png" alt="mist" class="current-icon" id="current-icon">
           </div>
           <div class="col-4">
-            <strong class="current-temperature">30ºC</strong>
+            <strong class="current-temperature" id="current-temperature">ºC</strong>
           </div>
           <div class="col-5 mt-3">
             <ul>
-              <li>
-                Humidity: 73%
+              <li id="humidity">
+                Humidity: %
               </li>
-              <li>
-                Wind: 2km/h
+              <li id="wind">
+                Wind: km/h
               </li>
             </ul>            
           </div>
         </div>
         <div class="row">
-          <div class="col rounded-pink">
+          <div class="col forecast-squares">
             <div class="row">
               <div class="col-6">
                 <p>Tomorrow</p>
@@ -82,7 +82,7 @@
               </div>
             </div>
           </div>
-          <div class="col rounded-pink">
+          <div class="col forecast-squares">
             <div class="row">
               <div class="col-6">
                 <p>Sunday</p>
@@ -95,15 +95,15 @@
           </div>
         </div>
         <div class="row">
-          <div class="col rounded-pink">
+          <div class="col forecast-squares">
             <p>Mon</p>
             <img src="src/icons/icon_09d.png" alt="shower rain" class="w-50">
           </div>
-          <div class="col rounded-pink">
+          <div class="col forecast-squares">
             <p>Tue</p>
             <img src="src/icons/icon_11d.png" alt="thunderstorm" class="w-50">
           </div>
-          <div class="col rounded-pink">
+          <div class="col forecast-squares">
             <p>Wed</p>
             <img src="src/icons/icon_50d.png" alt="mist" class="w-50">
           </div>
