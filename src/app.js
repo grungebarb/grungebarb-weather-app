@@ -28,7 +28,9 @@ function showTemperature(response) {
   document.querySelector("#weather-description").innerHTML = response.data.weather[0].description;
   // falta darle una vuelta a esta parte, consiguiendo cambiar los iconos por los de openweathermap...
   let icon = response.data.weather[0].icon;
-  document.querySelector("#current-icon").setAttribute("src", `src/icons/icon_${icon}.png`);
+  let iconElement = document.querySelector("#current-icon")
+  iconElement.setAttribute("src", `src/icons/icon_${icon}.png`);
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 function search(city) {
   let apiKey = `b89a2bda363f782379e90e985a8aa5e3`;
