@@ -8,7 +8,7 @@ function formatTime(time) {
   }
   let minutes = time.getMinutes();
   if (minutes < 10) {
-    hour = `0${hour}`;
+    minutes = `0${minutes}`;
   }
   let fullDate = `${day} ${date}, ${hour}:${minutes}h`
   return fullDate;
