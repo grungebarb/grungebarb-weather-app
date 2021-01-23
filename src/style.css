@@ -16,7 +16,7 @@ ul {
 }
 .weather-app {
   border: 5px solid #6193d4;
-  border-radius: 5px;
+  border-radius: 6px;
   padding: 20px;
   margin-bottom: 5px;
 }
@@ -24,22 +24,25 @@ ul {
   background-color: #6193d4;
   color: white;
 }
-/*.search-section,
 .city-info {
-  padding-left: 10px;
-}*/
-.city-info {
+  margin-left: 20px;
+}
+.acurate-data-section {
+  margin-top: 15px;
   margin-bottom: 15px;
+}
+.current-icon {
+  max-width: 120px;
 }
 .current-temperature {
   font-size: 50px;
-  line-height: 65px;
-  margin-left: 10px;
+  float: left;
 }
-
 .rounded-pink {
-  background-color: #6193d4;
-  color: white;
+  /*background-color: #6193d4;
+  color: white;*/
+  color: #6193d4;
+  border: solid 5px #6193d4;
   border-radius: 5px;
   margin: 10px;
   padding: 20px;
@@ -57,12 +60,8 @@ ul {
   background-color: #6193d4;
   color: white;
   font-size: 20px;
-  font-weight: bold;
   padding: 5px 15px;
   margin-top: 10px;
-}
-.float-left {
-  float: left;
 }
 /*.rainbow {
   background-color: white;

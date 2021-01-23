@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/82b05f9464.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
   <div class="container">
@@ -18,7 +19,7 @@
         <div class="search-section">
           <form>
             <div class="row">
-              <div class="col-8">
+              <div class="col-7">
                 <input
                 type="text"
                 placeholder="Enter a city, please" class="form-control">
@@ -26,6 +27,11 @@
               <div class="col-2">
                 <button type="submit" class="btn search-btn px-4">
                   <i class="fas fa-search"></i>
+                </button>
+              </div>
+              <div class="col-3">
+                <button type="submit" class="btn search-btn px-4">
+                  <strong>Current</strong>
                 </button>
               </div>
             </div>
@@ -37,30 +43,31 @@
           </h1>
           <ul>
             <li>
-              Friday 15, 05:00h
+              Last update:
+              <span id="current-time">
+                Friday 15, 05:00h</span>
             </li>
             <li>
               Clear
             </li>
           </ul>
-          <div class="row">
-            <div class="col-7">
-              <div class="clearfix">
-                <img src="https://ssl.gstatic.com/onebox/weather/64/snow.png" alt="clear weather" class="float-left">
-                <div class="float-left"><strong class="current-temperature">30ºC</strong>
-                </div>
-              </div>
-            </div>
-            <div class="col-5">
-              <ul>
-                <li>
-                  Humidity: 73%
-                </li>
-                <li>
-                  Wind: 2km/h
-                </li>
-              </ul>
-            </div>
+        </div>
+        <div class="row acurate-data-section">
+          <div class="col-3">
+            <img src="http://gingerandgoggles.es/icons_weather_app/icon_50d.png" alt="" class="current-icon">
+          </div>
+          <div class="col-4">
+            <strong class="current-temperature">30ºC</strong>
+          </div>
+          <div class="col-5 mt-3">
+            <ul>
+              <li>
+                Humidity: 73%
+              </li>
+              <li>
+                Wind: 2km/h
+              </li>
+            </ul>            
           </div>
         </div>
         <div class="row">
@@ -71,7 +78,7 @@
                 <p>32º | 7º</p>
               </div>
               <div class="col-6">
-                <img src="https://ssl.gstatic.com/onebox/weather/64/sunny_s_cloudy.png" alt="clear weather">
+                <img src="http://gingerandgoggles.es/icons_weather_app/icon_01d.png" alt="clear weather" class="w-100">
               </div>
             </div>
           </div>
@@ -82,7 +89,7 @@
                 <p>28º | 12º</p>
               </div>
               <div class="col-6">
-                <img src="https://ssl.gstatic.com/onebox/weather/64/sunny_s_cloudy.png" alt="clear weather">
+                <img src="http://gingerandgoggles.es/icons_weather_app/icon_03d.png" alt="clear weather" class="w-100">
               </div>
             </div>
           </div>
@@ -90,15 +97,15 @@
         <div class="row">
           <div class="col rounded-pink">
             <p>Mon</p>
-            <img src="https://ssl.gstatic.com/onebox/weather/64/sunny_s_cloudy.png" alt="clear weather">
+            <img src="http://gingerandgoggles.es/icons_weather_app/icon_09d.png" alt="clear weather" class="w-50">
           </div>
           <div class="col rounded-pink">
             <p>Tue</p>
-            <img src="https://ssl.gstatic.com/onebox/weather/64/sunny_s_cloudy.png" alt="clear weather">
+            <img src="http://gingerandgoggles.es/icons_weather_app/icon_11d.png" alt="clear weather" class="w-50">
           </div>
           <div class="col rounded-pink">
             <p>Wed</p>
-            <img src="https://ssl.gstatic.com/onebox/weather/64/sunny_s_cloudy.png" alt="clear weather">
+            <img src="http://gingerandgoggles.es/icons_weather_app/icon_50d.png" alt="clear weather" class="w-50">
           </div>
         </div>
         <div class="row">
@@ -106,7 +113,7 @@
             Do yo want to see it on ºF?
           </div>
           <div class="col-4">
-            <button type="button" class="btn units-btn">YES!</button>
+            <button type="button" class="btn units-btn"><strong>YES!</strong></button>
             <!-- <input type="submit" value="Yes!" class="btn units-btn"> -->
           </div>
         </div>
