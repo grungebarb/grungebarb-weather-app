@@ -20,7 +20,6 @@ currentTime.innerHTML = formatTime(currentDate);
 
 // Search engine
 function showTemperature(response) {
-  console.log(response);
   document.querySelector("#current-city").innerHTML = `${response.data.name}, ${response.data.sys.country}`;
   celsiusTemp = Math.round(response.data.main.temp);
   document.querySelector("#current-temperature").innerHTML = `${celsiusTemp}ºC`;
@@ -41,6 +40,7 @@ function search(city) {
 function searchCity(event) {
   event.preventDefault();
   let city = document.querySelector("#search-input").value;
+  document.querySelector("#units-conversion").innerHTML = "F";
   search(city);  
 }
 let searchForm = document.querySelector("#search-form");
@@ -48,6 +48,22 @@ searchForm.addEventListener("submit", searchCity);
 search("Moralzarzal");
 
 // Icon library
+
+// Current button
+function showPosition(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiKey = `b89a2bda363f782379e90e985a8aa5e3`
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  document.querySelector("#units-conversion").innerHTML = "F";
+  axios.get(apiUrl).then(showTemperature);
+}
+function showCurrentTemp(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(showPosition);
+}
+let currentPlaceBtn = document.querySelector("#current-place-btn");
+currentPlaceBtn.addEventListener("click", showCurrentTemp);
 
 // Units convertion
 function changeUnits(event) {

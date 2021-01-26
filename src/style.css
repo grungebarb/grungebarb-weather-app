@@ -1,5 +1,6 @@
 body {
   font-family: "Montserrat", sans-serif;
+  color: #06193d;
 }
 h1 {
   font-size: 40px;
@@ -9,6 +10,9 @@ ul {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+.btn:hover {
+  color: #06193d;
 }
 .wrapper {
   max-width: 600px;
