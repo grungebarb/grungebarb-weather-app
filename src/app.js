@@ -32,8 +32,6 @@ function showTemperature(response) {
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
         // Forecast
-
-
 function formatDays(timestamp) {
   let date = new Date(timestamp);
   let hour = date.getHours();
@@ -44,23 +42,21 @@ function formatDays(timestamp) {
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
-  let forecastObj = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  let forecastDay = forecastObj[date.getDay()];
   return `${hour}:${minutes}h`;
 }
 function displayForecast(response) {
-  console.log(response.data);
   document.querySelector("#forecast-two").innerHTML = null;
   document.querySelector("#forecast-three").innerHTML = null;
   let forecast = null;
+  let timezone = response.data.city.timezone;
   for (let index = 0; index < 2; index++) {
     forecast = response.data.list[index];
     document.querySelector("#forecast-two").innerHTML += `
     <div class="col forecast-squares">
       <div class="row">
         <div class="col-6">
-          <p>${formatDays(forecast.dt * 1000)}</p>
-          <p><strong>${Math.round(forecast.main.temp_max)}º</strong> | ${Math.round(forecast.main.temp_min)}º</p>
+          <p>${formatDays((forecast.dt + timezone) * 1000)}</p>
+          <p><strong><span class="max-temp">${Math.round(forecast.main.temp_max)}</span>º</strong> | <span class="min-temp">${Math.round(forecast.main.temp_min)}</span>º</p>
         </div>
         <div class="col-6">
           <img src="src/icons/icon_${forecast.weather[0].icon}.png" alt="${forecast.weather[0].description}" class="w-100">
@@ -72,7 +68,7 @@ function displayForecast(response) {
     forecast = response.data.list[index];
     document.querySelector("#forecast-three").innerHTML += `
     <div class="col forecast-squares">
-      <p>${formatDays(forecast.dt * 1000)}</p>
+      <p>${formatDays((forecast.dt + timezone) * 1000)}</p>
       <img src="src/icons/icon_${forecast.weather[0].icon}.png" alt="${forecast.weather[0].description}" class="w-50">
     </div>`
   }
@@ -81,9 +77,13 @@ function search(city) {
   let apiKey = `b89a2bda363f782379e90e985a8aa5e3`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showTemperature);
-
-  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayForecast);
+  let apiUrlMetric = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+  let apiUrlImperial = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
+  if ((document.querySelector("#units-conversion")).innerHTML === "F") {
+    axios.get(apiUrlMetric).then(displayForecast);  
+  } else {
+    axios.get(apiUrlImperial).then(displayForecast);
+  } 
 }
 function searchCity(event) {
   event.preventDefault();
@@ -95,16 +95,16 @@ let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", searchCity);
 search("Moralzarzal");
 
-// Icon library
-
 // Current button
 function showPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let apiKey = `b89a2bda363f782379e90e985a8aa5e3`
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  let geoApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
   document.querySelector("#units-conversion").innerHTML = "F";
-  axios.get(apiUrl).then(showTemperature);
+  axios.get(geoApiUrl).then(showTemperature);
+  geoApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  axios.get(geoApiUrl).then(displayForecast);
 }
 function showCurrentTemp(event) {
   event.preventDefault();
@@ -113,14 +113,15 @@ function showCurrentTemp(event) {
 let currentPlaceBtn = document.querySelector("#current-place-btn");
 currentPlaceBtn.addEventListener("click", showCurrentTemp);
 
-// Units convertion
+// Units conversion
 function changeUnits(event) {
   event.preventDefault();
   let unitsConversion = document.querySelector("#units-conversion");
   if (unitsConversion.innerHTML === "F") {
     let tempElement = document.querySelector("#current-temperature");
-    let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
-    tempElement.innerHTML = `${Math.round(fahrenheitTemp)}ºF`;unitsConversion.innerHTML = "C";
+    let fahrenheitTemp = Math.round((celsiusTemp * 9) / 5 + 32);
+    tempElement.innerHTML = `${(fahrenheitTemp)}ºF`;
+    unitsConversion.innerHTML = "C";
   } else {
     let tempElement = document.querySelector("#current-temperature");
     tempElement.innerHTML = `${celsiusTemp}ºC`;
