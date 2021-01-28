@@ -24,7 +24,7 @@ function showTemperature(response) {
   celsiusTemp = Math.round(response.data.main.temp);
   document.querySelector("#current-temperature").innerHTML = `${celsiusTemp}ºC`;
   document.querySelector("#humidity").innerHTML = `Humidity: ${response.data.main.humidity}%`;
-  document.querySelector("#wind").innerHTML = `Wind: ${Math.round(response.data.wind.speed)}km/h`;
+  document.querySelector("#wind").innerHTML = `Wind speed: ${Math.round(response.data.wind.speed)}km/h`;
   document.querySelector("#weather-description").innerHTML = response.data.weather[0].description;
   let icon = response.data.weather[0].icon;
   let iconElement = document.querySelector("#current-icon")

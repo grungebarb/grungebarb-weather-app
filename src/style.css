@@ -11,6 +11,9 @@ ul {
   padding: 0;
   list-style: none;
 }
+li::first-letter {
+  text-transform: capitalize;
+}
 .btn:hover {
   color: #06193d;
 }
