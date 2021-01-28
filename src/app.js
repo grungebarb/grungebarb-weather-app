@@ -120,12 +120,42 @@ function changeUnits(event) {
   if (unitsConversion.innerHTML === "F") {
     let tempElement = document.querySelector("#current-temperature");
     let fahrenheitTemp = Math.round((celsiusTemp * 9) / 5 + 32);
-    tempElement.innerHTML = `${(fahrenheitTemp)}ºF`;
+    tempElement.innerHTML = `${fahrenheitTemp}ºF`;
     unitsConversion.innerHTML = "C";
+    
+    let forecastMax = document.querySelectorAll(".max-temp");
+    forecastMax.forEach(function (item) {
+      // grabbing the current value to convert
+      let currentTemp = item.innerHTML;
+      // convert to Fahrenheit
+      item.innerHTML = Math.round((currentTemp * 9) / 5 + 32);
+    });
+    let forecastMin = document.querySelectorAll(".min-temp");
+    forecastMin.forEach(function (item) {
+      // grabbing the current value to convert
+      let currentTemp = item.innerHTML;
+      // convert to Fahrenheit
+      item.innerHTML = Math.round((currentTemp * 9) / 5 + 32);
+    });
   } else {
     let tempElement = document.querySelector("#current-temperature");
     tempElement.innerHTML = `${celsiusTemp}ºC`;
     unitsConversion.innerHTML = "F";
+    
+    let forecastMax = document.querySelectorAll(".max-temp");
+    forecastMax.forEach(function (item) {
+      // grabbing the current value to convert
+      let currentTemp = item.innerHTML;
+      // convert to Celsius
+      item.innerHTML = Math.round(((currentTemp - 32) * 5) / 9);
+    });
+    let forecastMin = document.querySelectorAll(".min-temp");
+    forecastMin.forEach(function (item) {
+      // grabbing the current value to convert
+      let currentTemp = item.innerHTML;
+      // convert to Celsius
+      item.innerHTML = Math.round(((currentTemp - 32) * 5) / 9);
+    });
   }
 }
 let conversionButton = document.querySelector("#units-btn");
